@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(File.expand_path('lib', __dir__))
+require 'price_calculator'
+require 'yaml'
+
+# Load up the inventory and discounts
+INVENTORY = YAML.safe_load(File.read(File.join(__dir__, 'config/inventory.yml')))
+DISCOUNTS = YAML.safe_load(File.read(File.join(__dir__, 'config/discounts.yml')))
+
+puts 'Please enter all the items purchased separated by a comma'
+groceries = gets.chomp.split(',').map(&:strip).map(&:downcase)
+
+# Validate our input
+validator = PriceCalculator::InputValidator.new(INVENTORY.keys)
+response = validator.validate(*groceries)
+
+if response.valid?
+  totals = PriceCalculator::Totals.new(INVENTORY, DISCOUNTS, *groceries)
+  puts "\nItem\tQuantity\tPrice"
+  puts '--------------------------------------'
+  totals.items.each do |_, attributes|
+    puts "#{attributes[:name]}\t #{attributes[:quantity]}\t\t$#{attributes[:discounted_price].to_f}"
+  end
+
+  puts "\nTotal price : $#{totals.total.to_f}"
+  puts "You saved $#{totals.discount.to_f} today." if totals.discount.positive?
+else
+  suggestor = PriceCalculator::InputSuggestions.new(INVENTORY.keys)
+  response.errors.each do |unrecognized_item|
+    suggestions = suggestor.suggest(unrecognized_item)
+    puts "Unrecognized item #{unrecognized_item}. #{suggestions.any? ? "did you mean '#{suggestions.join('or')}'?" : nil}"
+  end
+end

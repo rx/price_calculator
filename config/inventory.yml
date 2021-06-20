@@ -1,0 +1,12 @@
+milk:
+  name: Milk
+  price: 3.97
+bread:
+  name: Bread
+  price: 2.17
+apple:
+  name: Apple
+  price: 0.89
+banana:
+  name: Banana
+  price: 0.99

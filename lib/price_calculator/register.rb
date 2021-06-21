@@ -15,12 +15,11 @@ module PriceCalculator
 
     # Takes an +Array+ of grocery codes as strings or symbols
     #
-    # Returns a +Response+ object
-    # On success data as +Receipt+
-    # On failure error contains an +Array+ of +Hash+ with the code and message:
+    # On success returns data as +Receipt+ object
     #
-    # Example error:
-    #   +[{code: 'bred', message: "Invalid item bread"}]+
+    # On failure returns error contains an +Array+ of error messages:
+    #
+    # Returns a +Response+ object
     def scan(*grocery_codes)
       response = @input_validator.validate(*grocery_codes)
       response = Response.new(data: Receipt.new(grocery_codes, repo: @repo)) if response.valid?

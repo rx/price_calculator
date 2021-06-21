@@ -1,0 +1,15 @@
+milk:
+  name: Nilk
+  price: 3.97
+bread:
+  name: Cread
+  price: 2.17
+apple:
+  name: Bpple
+  price: 0.89
+banana:
+  name: Canana
+  price: 0.99
+chips:
+  name: Chips
+  price: 2.99

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'price_calculator/input_validator'
+require 'price_calculator'
 
 RSpec.describe PriceCalculator::InputValidator do
   context 'valid input' do

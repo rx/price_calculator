@@ -2,16 +2,15 @@
 
 module PriceCalculator
   # InputSuggestions class
-  # Takes an array of valid inventory items and suggests correct inventory items for invalid items
+  # Takes an +Array+ of valid inventory items and suggests correct inventory items for invalid items
   class InputSuggestions
-    # new
-    # @param [Array] inventory_items Valid inventory items
+    # Takes an +Array+ - inventory_items Valid inventory item codes
     def initialize(inventory_items)
       @inventory_items = inventory_items
     end
 
-    # @param [String] groceries The groceries to validate against
-    # @return [ValidationResults] The validation results
+    # Takes an +Array+ of item codes to validate against
+    # Returns am +Array+ with suggestions
     def suggest(*groceries)
       item_checker = DidYouMean::SpellChecker.new(dictionary: @inventory_items)
       groceries.map do |item|

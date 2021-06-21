@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'price_calculator/response'
+require 'price_calculator'
 
 RSpec.describe PriceCalculator::Response do
   context 'empty' do

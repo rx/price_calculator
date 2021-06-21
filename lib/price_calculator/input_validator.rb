@@ -3,17 +3,16 @@
 require_relative 'response'
 
 module PriceCalculator
-  # InputValidator class
-  # Takes an array of valid inventory items and validates supplied groceries against the valid inventory
+  # Takes an +Array+ of valid inventory items and validates supplied groceries against the valid inventory
   class InputValidator
-    # new
-    # @param [Array] valid_items Valid inventory items as lowercase strings
+    # +Array+ inventory_items - inventory codes (lowercase strings)
     def initialize(inventory_items)
       @inventory_items = inventory_items
     end
 
-    # @param [Array] groceries The groceries to validate against as lowercase strings
-    # @return [Response] The validation results
+    #  +Array+ of grocery item codes
+    #
+    #  Return +Response+ object with the validation results
     def validate(*groceries)
       invalid_items = groceries - @inventory_items
       Response.new(data: groceries - invalid_items,

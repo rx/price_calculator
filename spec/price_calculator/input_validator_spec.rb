@@ -20,7 +20,7 @@ RSpec.describe PriceCalculator::InputValidator do
       response = input_validator.validate(invalid_item)
       expect(response.valid?).to eq(false)
       expect(response.data).to eq([])
-      expect(response.errors).to eq([invalid_item])
+      expect(response.errors).to eq(["Unrecognized item bannana. did you mean 'banana'?"])
     end
   end
 end

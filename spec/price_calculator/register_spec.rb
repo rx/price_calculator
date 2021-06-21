@@ -12,7 +12,6 @@ module PriceCalculator
       let(:groceries) { [] }
       it 'is valid' do
         result = Register.new(repo: inventory_repo).scan(*groceries)
-        puts result.inspect
         expect(result.valid?).to eq(true)
       end
     end

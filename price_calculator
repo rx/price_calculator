@@ -22,7 +22,7 @@ if response.valid?
   puts "\nTotal price : $#{receipt.total_due.to_f}"
   puts "You saved $#{receipt.discount_applied.to_f} today." if receipt.discount_applied.positive?
 else
-  response.errors.each do |unrecognized_item|
-    puts unrecognized_item[:message]
+  response.errors.each do |error_message|
+    puts error_message
   end
 end
